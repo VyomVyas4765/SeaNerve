@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+# Node / Vite
+node_modules/
+frontend/dist/
+*.local
+
+# Secrets (the Roboflow key lives in .env)
+.env
+
+# Data: recordings and downloads are large and regenerable.
+# data/geo/ (cable route, coastline, cities) is small and hand-made, so it stays in git.
+data/recordings/
+data/raw/
+data/patches/
+data/cache/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+/local

@@ -1,0 +1,45 @@
+/* Palette from the plan's "Look" section: dark navy, teal for the cable and gate,
+   coral for earthquakes, amber for P waves and the Watch level. */
+:root {
+  --bg: #0b1426;
+  --panel: #111d33;
+  --border: #22314f;
+  --text: #c9d4e6;
+  --text-h: #f2f6fc;
+  --muted: #7d8aa3;
+  --teal: #2cc5b8;
+  --coral: #ff6b5b;
+  --amber: #f5b13d;
+  --red: #e5484d;
+
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 14px/1.45 var(--sans);
+  color-scheme: dark;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--text-h);
+  margin: 0;
+}
+
+code {
+  font-family: var(--mono);
+}
