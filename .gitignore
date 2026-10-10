@@ -22,6 +22,7 @@ data/recordings/
 data/raw/
 data/patches/
 data/cache/
+data/plots/
 
 # OS / editor
 .DS_Store

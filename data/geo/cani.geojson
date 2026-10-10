@@ -1,0 +1,44 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "cani_car_nicobar",
+        "name": "CANI island segment via Car Nicobar (approximate route)",
+        "approximate": true,
+        "note": "Hut Bay (Little Andaman) - Car Nicobar - Kamorta. The Scenario-mode sensing cable. Real routes are not public."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [[92.56, 10.59], [92.82, 9.17], [93.53, 8.13]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "cani_port_blair_hut_bay",
+        "name": "CANI Port Blair - Hut Bay (approximate route)",
+        "approximate": true,
+        "note": "Display only."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [[92.73, 11.62], [92.62, 11.10], [92.56, 10.59]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "cani_trunk",
+        "name": "CANI trunk Chennai - Port Blair (approximate route)",
+        "approximate": true,
+        "note": "Display only. Has repeaters, so DAS cannot reach past the first one."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [[80.27, 13.08], [83.5, 12.6], [87.5, 12.1], [91.0, 11.8], [92.73, 11.62]]
+      }
+    }
+  ]
+}

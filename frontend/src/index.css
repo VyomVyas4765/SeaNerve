@@ -1,21 +1,29 @@
-/* Palette from the plan's "Look" section: dark navy, teal for the cable and gate,
-   coral for earthquakes, amber for P waves and the Watch level. */
+/* Palette from the deck mockup (slide 6): dark navy, teal for the cable and the gate,
+   coral for earthquakes, amber for P waves and the SIMULATED badge. */
 :root {
-  --bg: #0b1426;
-  --panel: #111d33;
-  --border: #22314f;
-  --text: #c9d4e6;
-  --text-h: #f2f6fc;
-  --muted: #7d8aa3;
+  --bg: #0a1424;
+  --panel: #101f35;
+  --panel-2: #152844;
+  --panel-3: #1b3152;
+  --border: #20334f;
+  --border-strong: #2d4669;
+  --ocean: #0d1c31;
+  --text: #c4cfe0;
+  --text-h: #f2f6fb;
+  --muted: #8191aa;
   --teal: #2cc5b8;
-  --coral: #ff6b5b;
+  --teal-bright: #3ee6c4;
+  --teal-deep: #0f4a47;
+  --coral: #e8603c;
   --amber: #f5b13d;
   --red: #e5484d;
+  --radius: 12px;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  --sans: 'Inter Variable', 'Segoe UI', system-ui, sans-serif;
+  --mono: ui-monospace, 'Cascadia Mono', Consolas, monospace;
 
-  font: 14px/1.45 var(--sans);
+  font: 14px/1.4 var(--sans);
+  font-feature-settings: 'cv11', 'ss01';
   color-scheme: dark;
   color: var(--text);
   background: var(--bg);
@@ -33,6 +41,10 @@ body,
   margin: 0;
 }
 
+body {
+  background: radial-gradient(1200px 600px at 70% -10%, #13284a 0%, transparent 60%), var(--bg);
+}
+
 h1,
 h2,
 h3 {
@@ -40,6 +52,69 @@ h3 {
   margin: 0;
 }
 
-code {
-  font-family: var(--mono);
+button,
+select {
+  font: inherit;
+  font-weight: 500;
+  color: var(--text-h);
+  background: var(--panel-2);
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  height: 34px;
+  padding: 0 12px;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    color 0.15s;
+}
+
+button:hover:not(:disabled),
+select:hover:not(:disabled) {
+  background: var(--panel-3);
+  border-color: #3b5a85;
+}
+
+button:focus-visible,
+select:focus-visible,
+tr:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+}
+
+button:disabled,
+select:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+button.on {
+  background: var(--teal-deep);
+  border-color: var(--teal);
+}
+
+button.link {
+  background: none;
+  border: none;
+  height: auto;
+  color: var(--teal);
+  padding: 0;
+}
+
+kbd {
+  display: inline-grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 5px;
+  font: 600 11px var(--sans);
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  border-bottom-width: 2px;
+}
+
+.muted {
+  color: var(--muted);
 }

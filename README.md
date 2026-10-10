@@ -88,23 +88,58 @@ npm install
 Copy `.env.example` to `.env` and add a Roboflow key if you want the hosted classifier. Without it,
 the rules classifier is used.
 
-## Run (development)
+## Run
+
+First time only, write the simulated recordings (about 400 MB in `data/recordings/`):
 
 ```powershell
-# Terminal 1: API on :8000
 cd backend
-.venv\Scripts\python -m uvicorn server.main:app --reload --port 8000
-
-# Terminal 2: dashboard on :5173, forwarding /api and /ws to :8000
-cd frontend
-npm run dev
+.venv\Scripts\python tools\make_scenarios.py
 ```
 
-For the demo, `npm run build` in `frontend/` and let FastAPI serve `frontend/dist`, so one process on
-one port runs everything with Wi-Fi off.
+**Demo (one process, one port, works with Wi-Fi off):**
+
+```powershell
+cd frontend
+npm run build
+cd ..\backend
+.venv\Scripts\python -m uvicorn server.main:app --port 8000
+```
+
+Open http://localhost:8000 and click a demo moment: **1 Real quake**, **2 India M7** or
+**3 Anchor drag** (each starts at its demo speed). Keys: `1` `2` `3` start a moment, `Space` pauses or
+resumes, `R` restarts. Every other recording is under *All recordings*. Hover the waterfall to read
+the distance and time under the pointer. The layout is checked at 1920×1080 and 1366×768.
+
+**Development (hot reload):** run the same uvicorn command with `--reload`, and in a second terminal
+`npm run dev` in `frontend/`, then open http://localhost:5173. Vite forwards `/api`, `/ws` and `/geo`
+to port 8000.
 
 ## Status
 
-Project initialised: backend package skeleton with a health route and a smoke test, and a bare Vite
-app that checks it can reach the backend. The build follows the software implementation plan
-(2026-10-10), starting with the data contracts and the synthetic generator.
+Agreed scope: [docs/build-spec.md](docs/build-spec.md).
+
+Done (plan hours 0-17, Checkpoints A and B):
+
+- Data contracts (`backend/core/contracts.py`, mirrored in `frontend/src/types.ts`).
+- Synthetic generator and the named recordings: `car_nicobar_m7`, `vessel_crossing`, `anchor_drag`,
+  `quiet`, `random-<seed>`.
+- Clean, STA/LTA trigger and physics gate. The gate passes the simulated M7 at 17 s (P reaches the
+  cable at 14.6 s) with the epicentre within about 1 km, and never passes the ship, the anchor or
+  10 minutes of quiet sea.
+- Stream engine: S pick, distance, origin time, rough magnitude and city countdowns, with alerts
+  revised from preliminary to updated to final. On the M7: distance 30 km (true 29.7), origin
+  within 0.1 s, M 6.9 (true 7.0), Port Blair's S arrival within 0.1 s.
+- FastAPI replay server (`/api/...`, `/ws`) and the dashboard: waterfall with the gate's curve and
+  P and S marks, offline map with spreading rings and countdowns, alert card, cable-versus-seismometer
+  bar (Port Blair: about 77 s against 36 s), pipeline strip, event log and metrics.
+
+Tools:
+
+```powershell
+cd backend
+.venv\Scripts\python tools\plot_recording.py          # waterfall PNGs in data/plots/
+.venv\Scripts\python tools\run_gate.py car_nicobar_m7  # the gate's verdict, second by second
+```
+
+Next: real QuakeFlow recordings in Replay mode (plan hours 16-18), then the ship and anchor tracker.
